@@ -8,10 +8,10 @@ Gem::Specification.new do |spec|
   spec.version       = Singdollar::VERSION
   spec.authors       = ["Chong-Yee Khoo"]
   spec.email         = ["mail@cykhoo.com"]
-  spec.description   = %q{TODO: Write a gem description}
-  spec.summary       = %q{TODO: Write a gem summary}
-  spec.homepage      = ""
-  spec.license       = "MIT"
+  spec.description   = %q{Rubygem to get exchange rates for the Singapore Dollar}
+  spec.summary       = %q{Rubygem to get exchange rates for the Singapore Dollar}
+  spec.homepage      = "http://www.cykhoo.com"
+  spec.license       = "Copyright 2013, Chong-Yee Khoo. All rights reserved."
 
   spec.files         = `git ls-files`.split($/)
   spec.executables   = spec.files.grep(%r{^bin/}) { |f| File.basename(f) }
@@ -20,4 +20,9 @@ Gem::Specification.new do |spec|
 
   spec.add_development_dependency "bundler", "~> 1.3"
   spec.add_development_dependency "rake"
+  spec.add_development_dependency 'rspec'
+  spec.add_development_dependency 'vcr'
+  spec.add_development_dependency 'webmock'
+
+  spec.add_runtime_dependency 'nokogiri'
 end
