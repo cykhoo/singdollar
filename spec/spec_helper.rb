@@ -1,6 +1,7 @@
 require 'bundler'
 Bundler.setup(:default, :development)
 
+require 'singdollar'
 require 'rspec'
 require 'vcr'
 require 'yaml'
