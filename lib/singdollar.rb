@@ -1,5 +1,5 @@
-module Singdollar
-  # Your code goes here...
+module SingDollar
+
 end
 
-require "singdollar/version"
+require 'singdollar/version'

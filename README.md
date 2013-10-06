@@ -1,4 +1,4 @@
-# Singdollar
+# SingDollar
 
 TODO: Write a gem description
 

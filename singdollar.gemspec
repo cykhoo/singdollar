@@ -5,7 +5,7 @@ require 'singdollar/version'
 
 Gem::Specification.new do |spec|
   spec.name          = "singdollar"
-  spec.version       = Singdollar::VERSION
+  spec.version       = SingDollar::VERSION
   spec.authors       = ["Chong-Yee Khoo"]
   spec.email         = ["mail@cykhoo.com"]
   spec.description   = %q{Rubygem to get exchange rates for the Singapore Dollar}
