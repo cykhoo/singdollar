@@ -1,11 +1,11 @@
 FactoryGirl.define do
   factory :exchange_rate, aliases: [:usd_exchange_rate], class: SingDollar::ExchangeRate do
-    currency     :usd
-    transactions [:usd_buying, :usd_selling]
+    bank_buying  :usd_buying
+    bank_selling :usd_selling
 
     factory :eur_exchange_rate do
-      currency     :eur
-      transactions [:eur_buying, :eur_selling]
+      bank_buying  :eur_buying
+      bank_selling :eur_selling
     end
   end
 end
