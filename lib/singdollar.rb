@@ -1,5 +1,13 @@
 module SingDollar
 
-end
+  require 'singdollar/version'
+  require 'singdollar/exchange_rates'
+  require 'singdollar/exchange_rate'
 
-require 'singdollar/version'
+  class << self
+
+    def get_exchange_rates
+      ExchangeRates.new
+    end
+  end
+end
