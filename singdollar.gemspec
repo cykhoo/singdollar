@@ -11,7 +11,7 @@ Gem::Specification.new do |spec|
   spec.description   = %q{Rubygem to get exchange rates for the Singapore Dollar}
   spec.summary       = %q{Rubygem to get exchange rates for the Singapore Dollar}
   spec.homepage      = "http://www.cykhoo.com"
-  spec.license       = "Copyright 2013, Chong-Yee Khoo. All rights reserved."
+  spec.license       = "Copyright 2013-2014, Chong-Yee Khoo. All rights reserved."
 
   spec.files         = `git ls-files`.split($/)
   spec.executables   = spec.files.grep(%r{^bin/}) { |f| File.basename(f) }
@@ -24,5 +24,6 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency 'vcr'
   spec.add_development_dependency 'webmock'
 
+  spec.add_runtime_dependency 'mechanize'
   spec.add_runtime_dependency 'nokogiri'
 end
