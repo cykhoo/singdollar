@@ -28,8 +28,8 @@ module SingDollar
       describe "transaction attribute" do
 
         it "can be set" do
-          transaction1 = FactoryGirl.build(:transaction)
-          transaction2 = FactoryGirl.build(:transaction, currency: :eur, tt: 1.7125, od: 1.7065)
+          transaction1 = FactoryGirl.build(:usd_buying)
+          transaction2 = FactoryGirl.build(:usd_selling)
           exchange_rate = FactoryGirl.build(:exchange_rate, transactions: [transaction1, transaction2])
           expect(exchange_rate.transactions[0]).to eq(transaction1)
           expect(exchange_rate.transactions[1]).to eq(transaction2)
