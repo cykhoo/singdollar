@@ -6,9 +6,9 @@ module SingDollar
 
     def initialize(args = {})
       @currency = args[:currency]
-      @type = args[:type]
-      @tt   = args[:tt]
-      @od   = args[:od]
+      @type     = args[:type]
+      @tt       = args[:tt]
+      @od       = args[:od]
     end
   end
 end

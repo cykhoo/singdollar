@@ -7,6 +7,5 @@ module SingDollar
       self[:usd] = ExchangeRate.new
       super
     end
-
   end
 end
