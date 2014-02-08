@@ -30,7 +30,7 @@ module SingDollar
         it "can be set" do
           transaction1 = FactoryGirl.build(:transaction)
           transaction2 = FactoryGirl.build(:transaction, currency: :eur, tt: 1.7125, od: 1.7065)
-          exchange_rate = ExchangeRate.new(transactions: [transaction1, transaction2])
+          exchange_rate = FactoryGirl.build(:exchange_rate, transactions: [transaction1, transaction2])
           expect(exchange_rate.transactions[0]).to eq(transaction1)
           expect(exchange_rate.transactions[1]).to eq(transaction2)
         end
