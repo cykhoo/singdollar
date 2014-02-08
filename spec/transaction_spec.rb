@@ -13,16 +13,16 @@ module SingDollar
     describe "attributes" do
 
       it "has attributes" do
-        expect(transaction).to respond_to(:name)
+        expect(transaction).to respond_to(:type)
         expect(transaction).to respond_to(:tt)
         expect(transaction).to respond_to(:od)
       end
 
-      describe "name attribute" do
+      describe "type attribute" do
 
         it "can be set" do
-          transaction = Transaction.new(name: :bank_buying)
-          expect(transaction.name).to eq(:bank_buying)
+          transaction = Transaction.new(type: :bank_buying)
+          expect(transaction.type).to eq(:bank_buying)
         end
       end
 
