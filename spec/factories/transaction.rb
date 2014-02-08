@@ -8,7 +8,7 @@ FactoryGirl.define do
     factory :usd_selling do
       type     :bank_selling
       tt       1.2787
-      od       1.2787
+      od       1.2788
     end
 
     factory :eur_buying do

@@ -40,7 +40,7 @@ module SingDollar
       end
 
       it "sets the bank_selling od key" do
-        expect(transactions.bank_selling.od).to eq(1.2787)
+        expect(transactions.bank_selling.od).to eq(1.2788)
       end
     end
   end

@@ -59,17 +59,17 @@ module SingDollar
         end
       end
 
-      describe "bank_selling_od method" do
+      describe "bank_selling_tt method" do
 
         it "returns the right data" do
-          expect(exchange_rate.bank_selling_od).to eq(1.2787)
+          expect(exchange_rate.bank_selling_tt).to eq(1.2787)
         end
       end
 
       describe "bank_selling_od method" do
 
         it "returns the right data" do
-          expect(exchange_rate.bank_selling_od).to eq(1.2787)
+          expect(exchange_rate.bank_selling_od).to eq(1.2788)
         end
       end
     end
