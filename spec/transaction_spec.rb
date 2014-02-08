@@ -19,34 +19,23 @@ module SingDollar
         expect(transaction).to respond_to(:od)
       end
 
-      describe "currency attribute" do
+      describe "setting attribute" do
 
-        it "can be set" do
-          transaction = Transaction.new(currency: :usd)
+        let(:transaction) { Transaction.new(currency: :usd, type: :bank_buying, tt: 1.2592, od: 1.2542) }
+
+        it "currency attribute" do
           expect(transaction.currency).to eq(:usd)
         end
-      end
 
-      describe "type attribute" do
-
-        it "can be set" do
-          transaction = Transaction.new(type: :bank_buying)
+        it "type attribute" do
           expect(transaction.type).to eq(:bank_buying)
         end
-      end
 
-      describe "tt attribute" do
-
-        it "can be set" do
-          transaction = Transaction.new(tt: 1.2592)
+        it "tt attribute" do
           expect(transaction.tt).to eq(1.2592)
         end
-      end
 
-      describe "od attribute" do
-
-        it "can be set" do
-          transaction = Transaction.new(od: 1.2542)
+        it "od attribute" do
           expect(transaction.od).to eq(1.2542)
         end
       end
