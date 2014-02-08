@@ -3,6 +3,7 @@ module SingDollar
   require 'singdollar/version'
   require 'singdollar/exchange_rates'
   require 'singdollar/exchange_rate'
+  require 'singdollar/transaction'
 
   class << self
 
