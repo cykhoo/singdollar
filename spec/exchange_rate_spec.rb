@@ -14,7 +14,7 @@ module SingDollar
 
       it "has attributes" do
         expect(exchange_rate).to respond_to(:currency)
-        expect(exchange_rate).to respond_to(:transaction)
+        expect(exchange_rate).to respond_to(:transactions)
       end
 
       describe "currency attribute" do
@@ -28,8 +28,11 @@ module SingDollar
       describe "transaction attribute" do
 
         it "can be set" do
-          exchange_rate = ExchangeRate.new(transaction: :bank_buying)
-          expect(exchange_rate.transaction).to eq(:bank_buying)
+          transaction1 = FactoryGirl.build(:transaction)
+          transaction2 = FactoryGirl.build(:transaction, currency: :eur, tt: 1.7125, od: 1.7065)
+          exchange_rate = ExchangeRate.new(transactions: [transaction1, transaction2])
+          expect(exchange_rate.transactions[0]).to eq(transaction1)
+          expect(exchange_rate.transactions[1]).to eq(transaction2)
         end
       end
     end

@@ -2,11 +2,11 @@ module SingDollar
 
   class ExchangeRate
 
-    attr_accessor :currency, :transaction
+    attr_accessor :currency, :transactions
 
     def initialize(args = {})
-      @currency    = args[:currency]
-      @transaction = args[:transaction]
+      @currency     = args[:currency]
+      @transactions = args[:transactions]
     end
   end
 end
