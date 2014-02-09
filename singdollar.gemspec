@@ -8,8 +8,8 @@ Gem::Specification.new do |spec|
   spec.version       = SingDollar::VERSION
   spec.authors       = ["Chong-Yee Khoo"]
   spec.email         = ["mail@cykhoo.com"]
-  spec.description   = %q{Rubygem to get exchange rates for the Singapore Dollar}
-  spec.summary       = %q{Rubygem to get exchange rates for the Singapore Dollar}
+  spec.description   = %q{Foreign exchange rates against the Singapore Dollar (SGD)}
+  spec.summary       = %q{Foreign exchange rates against the Singapore Dollar (SGD)}
   spec.homepage      = "http://www.cykhoo.com"
   spec.license       = "Copyright 2013-2014, Chong-Yee Khoo. All rights reserved."
 
