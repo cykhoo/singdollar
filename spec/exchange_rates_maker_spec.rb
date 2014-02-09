@@ -14,7 +14,10 @@ module SingDollar
 
     describe "puts" do
       it "puts" do
-        expect(exchange_rates_maker.create).to eq(1.2592)
+        exchange_rates = exchange_rates_maker.create
+
+        puts exchange_rates.inspect
+        # expect(exchange_rates_maker.create).to eq(1.2592)
       end
     end
 
