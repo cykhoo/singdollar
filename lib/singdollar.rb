@@ -8,8 +8,8 @@ module SingDollar
 
   class << self
 
-    def get_exchange_rates
-      ExchangeRates.new
+    def create
+      ExchangeRatesMaker.new.create
     end
   end
 end
