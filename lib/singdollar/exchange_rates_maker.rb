@@ -2,6 +2,7 @@ module SingDollar
 
   require 'mechanize'
   require 'nokogiri'
+  require 'bigdecimal'
 
   class ExchangeRatesMaker
 
@@ -20,13 +21,15 @@ module SingDollar
 
         exchange_rate = ExchangeRate.new
 
+        units = currency_node[1].text.strip.split[0].to_f
+
         currency = currency_node[0].text.strip.downcase.to_sym
 
         transaction_bank_selling = Transaction.new
 
         transaction_bank_selling.currency = currency
         transaction_bank_selling.type     = :bank_selling
-        bank_selling_tt_od                = currency_node[3].text.strip.to_f
+        bank_selling_tt_od                = (BigDecimal.new(currency_node[3].text.strip)/units).to_f
         transaction_bank_selling.tt       = bank_selling_tt_od
         transaction_bank_selling.od       = bank_selling_tt_od
 
@@ -34,8 +37,8 @@ module SingDollar
 
         transaction_bank_buying.currency = currency
         transaction_bank_buying.type     = :bank_buying
-        transaction_bank_buying.tt       = currency_node[4].text.strip.to_f
-        transaction_bank_buying.od       = currency_node[5].text.strip.to_f
+        transaction_bank_buying.tt       = (BigDecimal.new(currency_node[4].text.strip)/units).to_f
+        transaction_bank_buying.od       = (BigDecimal.new(currency_node[5].text.strip)/units).to_f
 
         exchange_rate.bank_selling = transaction_bank_selling
         exchange_rate.bank_buying  = transaction_bank_buying
