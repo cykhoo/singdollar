@@ -25,7 +25,8 @@ module SingDollar
     describe "initialize" do
       transaction_buying = FactoryGirl.build(:usd_buying)
       trasaction_selling = FactoryGirl.build(:usd_selling)
-      exchange_rate = ExchangeRate.new(bank_buying: transaction_buying, bank_selling: trasaction_selling)
+      exchange_rate      = ExchangeRate.new(bank_buying: transaction_buying,
+                                            bank_selling: trasaction_selling)
 
       it "sets the bank_buying tt key" do
         expect(exchange_rate.bank_buying.tt).to eq(1.2592)

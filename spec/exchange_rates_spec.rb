@@ -16,7 +16,7 @@ module SingDollar
 
     it "values are ExchangeRate objects" do
       usd_exchange_rate = FactoryGirl.build(:usd_exchange_rate)
-      exchange_rates = { usd: usd_exchange_rate }
+      exchange_rates    = { usd: usd_exchange_rate }
       expect(exchange_rates[:usd].class).to eq(ExchangeRate)
     end
 
