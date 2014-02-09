@@ -4,14 +4,10 @@ module SingDollar
 
   describe ExchangeRate, :vcr, :core do
 
-    let(:exchange_rate) { ExchangeRate.new }
+    let(:exchange_rate) { FactoryGirl.build(:exchange_rate) }
 
     it "exists" do
       expect(exchange_rate).to_not be_nil
-    end
-
-    it "is a subclass of Hash" do
-      expect(exchange_rate.class.superclass).to eq(Hash)
     end
 
     describe "attributes" do
@@ -22,11 +18,7 @@ module SingDollar
       end
     end
 
-    describe "initialize" do
-      transaction_buying = FactoryGirl.build(:usd_buying)
-      trasaction_selling = FactoryGirl.build(:usd_selling)
-      exchange_rate      = ExchangeRate.new(bank_buying: transaction_buying,
-                                            bank_selling: trasaction_selling)
+    describe "components" do
 
       it "sets the bank_buying tt key" do
         expect(exchange_rate.bank_buying.tt).to eq(1.2592)

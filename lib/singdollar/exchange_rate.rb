@@ -1,6 +1,6 @@
 module SingDollar
 
-  class ExchangeRate < Hash
+  class ExchangeRate
 
     attr_accessor :bank_buying, :bank_selling
 
