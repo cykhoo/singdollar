@@ -5,6 +5,7 @@ module SingDollar
   require 'singdollar/exchange_rate'
   require 'singdollar/transaction'
   require 'singdollar/exchange_rates_maker'
+  require 'singdollar/xml_maker'
 
   class << self
 
