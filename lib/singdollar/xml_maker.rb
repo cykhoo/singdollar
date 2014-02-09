@@ -11,7 +11,20 @@ module SingDollar
     def make_xml
       builder = Nokogiri::XML::Builder.new(:encoding => 'UTF-8') do |xml|
         xml.send(:"singdollar", namespace_schemaloc) do
-          "5"
+          xml.send(:"exchange-rates") do
+            caller_object.each do |currency, exchange_rate|
+              xml.send(:"exchange-rate", currency: currency) do
+                xml.bank_buying do
+                  xml.tt exchange_rate.bank_buying.tt
+                  xml.od exchange_rate.bank_buying.od
+                end
+                xml.bank_selling do
+                  xml.tt exchange_rate.bank_selling.tt
+                  xml.od exchange_rate.bank_selling.od
+                end
+              end
+            end
+          end
         end
       end
       builder.to_xml

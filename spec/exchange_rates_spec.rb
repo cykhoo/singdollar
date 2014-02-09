@@ -32,6 +32,11 @@ module SingDollar
         let(:exchange_rates_xml) { exchange_rates.to_xml}
 
         describe "XML declaration" do
+
+          it "puts" do
+            puts exchange_rates_xml
+          end
+
           it "has an XML declaration" do
             expect(exchange_rates_xml).to include('<?xml')
           end
@@ -42,6 +47,25 @@ module SingDollar
 
           it "has the right encoding" do
             expect(exchange_rates_xml).to include('UTF-8')
+          end
+        end
+
+        describe "singdollar tag" do
+
+          it "has a singdollar tag" do
+            expect(exchange_rates_xml).to include("<singdollar")
+          end
+
+          it "has the right singdollar xmlns attribute" do
+            expect(exchange_rates_xml).to include('xmlns="http://www.cantab-ip.com/singdollar')
+          end
+
+          it "has the right singdollar xmlns:xsi attribute" do
+            expect(exchange_rates_xml).to include('xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance')
+          end
+
+          it "has the right singdollar xsi:schema-location attribute" do
+            expect(exchange_rates_xml).to include('xsi:schemaLocation="http://www.cantab-ip.com/singdollar singdollar.xsd"')
           end
         end
       end
