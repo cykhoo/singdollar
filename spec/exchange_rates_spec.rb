@@ -23,7 +23,7 @@ module SingDollar
       describe "to_xml method" do
 
         let(:exchange_rates) do
-          exchange_rates = ExchangeRates.new
+          exchange_rates       = FactoryGirl.build(:exchange_rates)
           exchange_rates[:usd] = FactoryGirl.build(:usd_exchange_rate)
           exchange_rates[:eur] = FactoryGirl.build(:eur_exchange_rate)
           exchange_rates
