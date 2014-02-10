@@ -8,6 +8,7 @@ module SingDollar
 
     def create
       exchange_rates = ExchangeRates.new
+      exchange_rates.date_time = make_date_time
       currencies = %w(:usd :aud :cad :cnh :dkk :eur :hkd :inr :idr :jpy :nzd :nok :lkr :gbp :sek :chf :thb)
       currencies.each_with_index do |currency, index|
         currency_node = currency_node(index)
@@ -72,8 +73,15 @@ module SingDollar
       doc.xpath("//*[text()='Foreign Exchange against S$']/../following-sibling::table[1]//tr[4]/td")
     end
 
+    def date_time_node
+      doc.xpath("//*[text()='OCBC FOREIGN EXCHANGE RATES']/following-sibling::p[2]")
     end
 
+    def make_date_time
+      date_time_text = date_time_node.text
+      date_match = date_time_text.match(/\d{2}\s[a-zA-Z]{3}\s\d{4}/)[0]
+      time_match = date_time_text.match(/\d{2}:\d{2}:\d{2}\s(AM|PM)/)[0]
+      Time.parse(date_match + " " + time_match)
     end
   end
 end

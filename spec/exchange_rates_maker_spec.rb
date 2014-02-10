@@ -32,6 +32,10 @@ module SingDollar
 
       describe "ExchangeRates components" do
 
+        it "has a date_time component" do
+          expect(exchange_rates.date_time).to_not be_nil
+        end
+
         it "has :usd component" do
           expect(exchange_rates[:usd]).to_not be_nil
         end

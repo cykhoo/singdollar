@@ -2,6 +2,8 @@ module SingDollar
 
   class ExchangeRates < Hash
 
+    attr_accessor :date_time
+
     def initialize
       super
     end
