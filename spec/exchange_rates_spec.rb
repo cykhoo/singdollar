@@ -16,7 +16,8 @@ module SingDollar
 
     describe "interface" do
 
-      it "methods" do
+      it "attributes and methods" do
+        expect(exchange_rates).to respond_to(:date_time)
         expect(exchange_rates).to respond_to(:to_xml)
       end
 
