@@ -49,15 +49,15 @@ module SingDollar
     end
 
     def agent
-      @agent || Mechanize.new
+      @agent ||= Mechanize.new
     end
 
     def page
-      @page || agent.get('http://www.ocbc.com/rates/daily_price_fx.html')
+      @page ||= agent.get('http://www.ocbc.com/rates/daily_price_fx.html')
     end
 
     def html
-      page.body
+      @html ||= page.body
     end
 
     def doc
@@ -72,72 +72,8 @@ module SingDollar
       doc.xpath("//*[text()='Foreign Exchange against S$']/../following-sibling::table[1]//tr[4]/td")
     end
 
-    def usd_row
-      doc.xpath("//*[text()='Foreign Exchange against S$']/../following-sibling::table[1]//tr[3]/td")
     end
 
-    def aud_row
-      doc.xpath("//*[text()='Foreign Exchange against S$']/../following-sibling::table[1]//tr[4]/td")
-    end
-
-    def cad_row
-      doc.xpath("//*[text()='Foreign Exchange against S$']/../following-sibling::table[1]//tr[5]/td")
-    end
-
-    def cnh_row
-      doc.xpath("//*[text()='Foreign Exchange against S$']/../following-sibling::table[1]//tr[6]/td")
-    end
-
-    def dkk_row
-      doc.xpath("//*[text()='Foreign Exchange against S$']/../following-sibling::table[1]//tr[7]/td")
-    end
-
-    def eur_row
-      doc.xpath("//*[text()='Foreign Exchange against S$']/../following-sibling::table[1]//tr[8]/td")
-    end
-
-    def hkd_row
-      doc.xpath("//*[text()='Foreign Exchange against S$']/../following-sibling::table[1]//tr[9]/td")
-    end
-
-    def inr_row
-      doc.xpath("//*[text()='Foreign Exchange against S$']/../following-sibling::table[1]//tr[10]/td")
-    end
-
-    def idr_row
-      doc.xpath("//*[text()='Foreign Exchange against S$']/../following-sibling::table[1]//tr[11]/td")
-    end
-
-    def jpy_row
-      doc.xpath("//*[text()='Foreign Exchange against S$']/../following-sibling::table[1]//tr[12]/td")
-    end
-
-    def nzd_row
-      doc.xpath("//*[text()='Foreign Exchange against S$']/../following-sibling::table[1]//tr[13]/td")
-    end
-
-    def nok_row
-      doc.xpath("//*[text()='Foreign Exchange against S$']/../following-sibling::table[1]//tr[14]/td")
-    end
-
-    def lkr_row
-      doc.xpath("//*[text()='Foreign Exchange against S$']/../following-sibling::table[1]//tr[15]/td")
-    end
-
-    def gbp_row
-      doc.xpath("//*[text()='Foreign Exchange against S$']/../following-sibling::table[1]//tr[16]/td")
-    end
-
-    def sek_row
-      doc.xpath("//*[text()='Foreign Exchange against S$']/../following-sibling::table[1]//tr[17]/td")
-    end
-
-    def chf_row
-      doc.xpath("//*[text()='Foreign Exchange against S$']/../following-sibling::table[1]//tr[18]/td")
-    end
-
-    def thb_row
-      doc.xpath("//*[text()='Foreign Exchange against S$']/../following-sibling::table[1]//tr[19]/td")
     end
   end
 end
