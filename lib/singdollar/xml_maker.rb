@@ -13,7 +13,7 @@ module SingDollar
         xml.send(:"singdollar", namespace_schemaloc) do
           xml.send(:"exchange-rates", date: caller_object.date_time) do
             caller_object.each do |currency, exchange_rate|
-              xml.send(:"exchange-rate", currency: currency) do
+              xml.send(:"exchange-rate", currency: currency.upcase) do
                 xml.send(:"bank-buying") do
                   xml.tt exchange_rate.bank_buying.tt
                   xml.od exchange_rate.bank_buying.od
