@@ -81,7 +81,7 @@ module SingDollar
       date_time_text = date_time_node.text
       date_match = date_time_text.match(/\d{2}\s[a-zA-Z]{3}\s\d{4}/)[0]
       time_match = date_time_text.match(/\d{2}:\d{2}:\d{2}\s(AM|PM)/)[0]
-      Time.parse(date_match + " " + time_match)
+      Time.parse(date_match + " " + time_match + "SGT")
     end
   end
 end
