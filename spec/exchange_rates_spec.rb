@@ -19,6 +19,7 @@ module SingDollar
       it "attributes and methods" do
         expect(exchange_rates).to respond_to(:date_time)
         expect(exchange_rates).to respond_to(:to_xml)
+        expect(exchange_rates).to respond_to(:to_fmpxml)
       end
 
       describe "to_xml method" do
@@ -67,6 +68,37 @@ module SingDollar
 
           xit "has the right singdollar xsi:schema-location attribute" do
             expect(exchange_rates_xml).to include('xsi:schemaLocation="http://www.cantab-ip.com/singdollar singdollar.xsd"')
+          end
+        end
+      end
+
+      describe "to_fmpxml method" do
+
+        let(:exchange_rates) do
+          exchange_rates       = FactoryGirl.build(:exchange_rates)
+          exchange_rates[:usd] = FactoryGirl.build(:usd_exchange_rate)
+          exchange_rates[:eur] = FactoryGirl.build(:eur_exchange_rate)
+          exchange_rates
+        end
+
+        let(:exchange_rates_fmpxml) { exchange_rates.to_fmpxml}
+
+        describe "XML declaration" do
+
+          it "puts" do
+            puts exchange_rates_fmpxml
+          end
+
+          it "has an XML declaration" do
+            expect(exchange_rates_fmpxml).to include('<?xml')
+          end
+
+          it "has the right XML version" do
+            expect(exchange_rates_fmpxml).to include('version="1.0"')
+          end
+
+          it "has the right encoding" do
+            expect(exchange_rates_fmpxml).to include('UTF-8')
           end
         end
       end
