@@ -35,10 +35,6 @@ module SingDollar
 
         describe "XML declaration" do
 
-          it "puts" do
-            puts exchange_rates_xml
-          end
-
           it "has an XML declaration" do
             expect(exchange_rates_xml).to include('<?xml')
           end
@@ -84,10 +80,6 @@ module SingDollar
         let(:exchange_rates_fmpxml) { exchange_rates.to_fmpxml}
 
         describe "XML declaration" do
-
-          it "puts" do
-            puts exchange_rates_fmpxml
-          end
 
           it "has an XML declaration" do
             expect(exchange_rates_fmpxml).to include('<?xml')
