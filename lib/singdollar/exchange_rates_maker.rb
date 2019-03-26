@@ -30,7 +30,11 @@ module SingDollar
 
         transaction_bank_selling.currency = currency
         transaction_bank_selling.type     = :bank_selling
-        bank_selling_tt_od                = (BigDecimal.new(currency_node[3].text.strip)/units).to_f
+        if currency_node[3].text.strip != "N.A"
+          bank_selling_tt_od                = (BigDecimal(currency_node[3].text.strip)/units).to_f
+        else
+          bank_selling_tt_od                = 0
+        end
         transaction_bank_selling.tt       = bank_selling_tt_od
         transaction_bank_selling.od       = bank_selling_tt_od
 
@@ -38,8 +42,18 @@ module SingDollar
 
         transaction_bank_buying.currency = currency
         transaction_bank_buying.type     = :bank_buying
-        transaction_bank_buying.tt       = (BigDecimal.new(currency_node[4].text.strip)/units).to_f
-        transaction_bank_buying.od       = (BigDecimal.new(currency_node[5].text.strip)/units).to_f
+
+        if currency_node[4].text.strip != "N.A"
+          transaction_bank_buying.tt       = (BigDecimal(currency_node[4].text.strip)/units).to_f
+        else
+          transaction_bank_buying.tt       = 0
+        end
+
+        if currency_node[5].text.strip != "N.A"
+          transaction_bank_buying.od       = (BigDecimal(currency_node[5].text.strip)/units).to_f
+        else
+          transaction_bank_buying.od       = 0
+        end
 
         exchange_rate.bank_selling = transaction_bank_selling
         exchange_rate.bank_buying  = transaction_bank_buying
