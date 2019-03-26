@@ -25,9 +25,9 @@ module SingDollar
       describe "to_xml method" do
 
         let(:exchange_rates) do
-          exchange_rates       = FactoryGirl.build(:exchange_rates)
-          exchange_rates[:usd] = FactoryGirl.build(:usd_exchange_rate)
-          exchange_rates[:eur] = FactoryGirl.build(:eur_exchange_rate)
+          exchange_rates       = FactoryBot.build(:exchange_rates)
+          exchange_rates[:usd] = FactoryBot.build(:usd_exchange_rate)
+          exchange_rates[:eur] = FactoryBot.build(:eur_exchange_rate)
           exchange_rates
         end
 
@@ -71,9 +71,9 @@ module SingDollar
       describe "to_fmpxml method" do
 
         let(:exchange_rates) do
-          exchange_rates       = FactoryGirl.build(:exchange_rates)
-          exchange_rates[:usd] = FactoryGirl.build(:usd_exchange_rate)
-          exchange_rates[:eur] = FactoryGirl.build(:eur_exchange_rate)
+          exchange_rates       = FactoryBot.build(:exchange_rates)
+          exchange_rates[:usd] = FactoryBot.build(:usd_exchange_rate)
+          exchange_rates[:eur] = FactoryBot.build(:eur_exchange_rate)
           exchange_rates
         end
 

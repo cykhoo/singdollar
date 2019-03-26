@@ -23,7 +23,7 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency 'rspec'
   spec.add_development_dependency 'vcr'
   spec.add_development_dependency 'webmock'
-  spec.add_development_dependency 'factory_girl'
+  spec.add_development_dependency 'factory_bot'
 
   spec.add_runtime_dependency 'mechanize'
   spec.add_runtime_dependency 'nokogiri'

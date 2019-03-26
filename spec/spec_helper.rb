@@ -6,9 +6,9 @@ require 'rspec'
 require 'vcr'
 require 'yaml'
 require 'open-uri'
-require 'factory_girl'
+require 'factory_bot'
 
-FactoryGirl.find_definitions
+FactoryBot.find_definitions
 
 VCR.configure do |config|
   config.cassette_library_dir = 'spec/cassettes'

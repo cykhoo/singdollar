@@ -21,7 +21,7 @@ module SingDollar
 
       describe "setting attribute" do
 
-        let(:transaction) { FactoryGirl.build(:transaction) }
+        let(:transaction) { FactoryBot.build(:transaction) }
 
         it "currency attribute" do
           expect(transaction.currency).to eq(:usd)

@@ -4,7 +4,7 @@ module SingDollar
 
   describe ExchangeRate, :vcr, :core do
 
-    let(:exchange_rate) { FactoryGirl.build(:exchange_rate) }
+    let(:exchange_rate) { FactoryBot.build(:exchange_rate) }
 
     it "exists" do
       expect(exchange_rate).to_not be_nil
