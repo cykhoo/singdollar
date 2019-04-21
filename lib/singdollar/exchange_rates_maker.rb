@@ -9,7 +9,7 @@ module SingDollar
     def create
       exchange_rates = ExchangeRates.new
       exchange_rates.date_time = make_date_time
-      currencies = %w(:usd :aud :cad :cnh :dkk :eur :hkd :inr :idr :jpy :nzd :nok :lkr :gbp :sek :chf :thb)
+      currencies = %w(:zar :usd :aud :brl :cad :cnh :dkk :eur :hkd :inr :idr :jpy :krw :myr :mxn :nzd :nok :php :rub :sar :lkr :gbp :sek :chf :twd :thb :try :aed)
       currencies.each_with_index do |currency, index|
         currency_node = currency_node(index)
         exchange_rate = make_exchange_rate(currency_node)
