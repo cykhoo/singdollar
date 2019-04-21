@@ -16,7 +16,6 @@ module SingDollar
         expect(exchange_rates_maker).to respond_to(:html)
         expect(exchange_rates_maker).to respond_to(:doc)
         expect(exchange_rates_maker).to respond_to(:currency_node)
-        expect(exchange_rates_maker).to respond_to(:rates_table)
         expect(exchange_rates_maker).to respond_to(:date_time_node)
         expect(exchange_rates_maker).to respond_to(:make_date_time)
       end

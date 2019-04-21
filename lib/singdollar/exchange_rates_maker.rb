@@ -83,10 +83,6 @@ module SingDollar
       doc.xpath("//*[text()='Foreign Exchange against S$']/../following-sibling::table[1]//tr[#{index + 3}]/td")
     end
 
-    def rates_table
-      doc.xpath("//*[text()='Foreign Exchange against S$']/../following-sibling::table[1]//tr[4]/td")
-    end
-
     def date_time_node
       doc.xpath("//*[text()='OCBC FOREIGN EXCHANGE RATES']/following-sibling::p[2]")
     end
