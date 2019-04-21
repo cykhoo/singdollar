@@ -54,15 +54,15 @@ module SingDollar
             expect(exchange_rates_xml).to include("<singdollar")
           end
 
-          xit "has the right singdollar xmlns attribute" do
+          it "has the right singdollar xmlns attribute" do
             expect(exchange_rates_xml).to include('xmlns="http://www.cantab-ip.com/singdollar')
           end
 
-          xit "has the right singdollar xmlns:xsi attribute" do
+          it "has the right singdollar xmlns:xsi attribute" do
             expect(exchange_rates_xml).to include('xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance')
           end
 
-          xit "has the right singdollar xsi:schema-location attribute" do
+          it "has the right singdollar xsi:schema-location attribute" do
             expect(exchange_rates_xml).to include('xsi:schemaLocation="http://www.cantab-ip.com/singdollar singdollar.xsd"')
           end
         end
