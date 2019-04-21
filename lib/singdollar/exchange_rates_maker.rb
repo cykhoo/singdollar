@@ -9,7 +9,7 @@ module SingDollar
     def create
       exchange_rates = ExchangeRates.new
       exchange_rates.date_time = make_date_time
-      currencies = %w(:zar :usd :aud :brl :cad :cnh :dkk :eur :hkd :inr :idr :jpy :krw :myr :mxn :nzd :nok :php :rub :sar :lkr :gbp :sek :chf :twd :thb :try :aed)
+      currencies = get_available_currencies
       currencies.each_with_index do |currency, index|
         currency_node = currency_node(index)
         exchange_rate = make_exchange_rate(currency_node)
@@ -79,12 +79,21 @@ module SingDollar
       @doc ||= Nokogiri::HTML(html)
     end
 
+    def currencies_column
+      doc.xpath("//*[text()='Foreign Exchange against S$']/../following-sibling::table[1]//tr[position() >= 3]/td[1]")
+    end
+
     def currency_node(index)
       doc.xpath("//*[text()='Foreign Exchange against S$']/../following-sibling::table[1]//tr[#{index + 3}]/td")
     end
 
     def date_time_node
       doc.xpath("//*[text()='OCBC FOREIGN EXCHANGE RATES']/following-sibling::p[2]")
+    end
+
+    def get_available_currencies
+      currencies_list = currencies_column.text.gsub(/\s+/m, ' ').strip.downcase.split(" ").map(&:to_sym)
+      currencies_list
     end
 
     def make_date_time
