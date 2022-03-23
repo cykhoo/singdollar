@@ -9,7 +9,6 @@ module SingDollar
     end
 
     def make_fmpxml
-      notes = "Imported from Singapore Patent Register on #{Time.now}"
       metadata_fields = ["ISO 4217 Code", "TEXT",
                          "Rate Bank Buying", "NUMBER",
                          "Rate Bank Selling", "NUMBER",
@@ -20,8 +19,7 @@ module SingDollar
           caller_object.each do |currency, exchange_rate|
             xml.ROW(MODID: "0", RECORDID: "0") do
               [currency.upcase,
-               exchange_rate.bank_buying.tt,
-               exchange_rate.bank_selling.tt,
+               exchange_rate.bank_buying.rate,
                date_time].each do |value|
                 # value = value.to_slash_format if value.instance_of?(Time)
                 xml.COL do

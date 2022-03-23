@@ -2,13 +2,12 @@ module SingDollar
 
   class Transaction
 
-    attr_accessor :currency, :type, :tt, :od
+    attr_accessor :currency, :type, :rate
 
     def initialize(args = {})
       @currency = args[:currency]
       @type     = args[:type]
-      @tt       = args[:tt]
-      @od       = args[:od]
+      @rate     = args[:rate]
     end
   end
 end

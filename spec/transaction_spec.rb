@@ -15,8 +15,7 @@ module SingDollar
       it "has attributes" do
         expect(transaction).to respond_to(:currency)
         expect(transaction).to respond_to(:type)
-        expect(transaction).to respond_to(:tt)
-        expect(transaction).to respond_to(:od)
+        expect(transaction).to respond_to(:rate)
       end
 
       describe "setting attribute" do
@@ -31,12 +30,8 @@ module SingDollar
           expect(transaction.type).to eq(:bank_buying)
         end
 
-        it "tt attribute" do
-          expect(transaction.tt).to eq(1.2592)
-        end
-
-        it "od attribute" do
-          expect(transaction.od).to eq(1.2542)
+        it "rate attribute" do
+          expect(transaction.rate).to eq(1.2592)
         end
       end
     end

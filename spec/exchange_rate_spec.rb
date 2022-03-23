@@ -20,20 +20,12 @@ module SingDollar
 
     describe "components" do
 
-      it "sets the bank_buying tt key" do
-        expect(exchange_rate.bank_buying.tt).to eq(1.2592)
+      it "sets the bank_buying rate key" do
+        expect(exchange_rate.bank_buying.rate).to eq(1.2592)
       end
 
-      it "sets the bank_buying od key" do
-        expect(exchange_rate.bank_buying.od).to eq(1.2542)
-      end
-
-      it "sets the bank_selling tt key" do
-        expect(exchange_rate.bank_selling.tt).to eq(1.2787)
-      end
-
-      it "sets the bank_selling od key" do
-        expect(exchange_rate.bank_selling.od).to eq(1.2788)
+      it "sets the bank_selling rate key" do
+        expect(exchange_rate.bank_selling.rate).to eq(1.2787)
       end
     end
   end

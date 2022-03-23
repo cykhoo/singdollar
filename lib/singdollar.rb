@@ -1,6 +1,7 @@
 module SingDollar
 
   require 'singdollar/version'
+  require 'singdollar/browser'
   require 'singdollar/exchange_rates'
   require 'singdollar/exchange_rate'
   require 'singdollar/transaction'
@@ -10,8 +11,8 @@ module SingDollar
 
   class << self
 
-    def create
-      ExchangeRatesMaker.new.create
+    def exchange_rates
+      ExchangeRatesMaker.new.make_exchange_rates
     end
   end
 end

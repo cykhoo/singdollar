@@ -11,7 +11,7 @@ Gem::Specification.new do |spec|
   spec.description   = %q{Foreign exchange rates against the Singapore Dollar (SGD)}
   spec.summary       = %q{Foreign exchange rates against the Singapore Dollar (SGD)}
   spec.homepage      = "http://www.cykhoo.com"
-  spec.license       = "Copyright 2013-2014, Chong-Yee Khoo. All rights reserved."
+  spec.license       = "Copyright 2013-2022, Chong-Yee Khoo. All rights reserved."
 
   # Prevent pushing this gem to RubyGems.org. To allow pushes either set the 'allowed_push_host', '~> '
   # to allow pushing to a single host or delete this section to allow pushing to any host.
@@ -34,6 +34,7 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency 'webmock'
   spec.add_development_dependency 'factory_bot'
 
-  spec.add_runtime_dependency 'mechanize'
+  spec.add_runtime_dependency "capybara"
+  spec.add_runtime_dependency "selenium-webdriver", "< 4.0"
   spec.add_runtime_dependency 'nokogiri'
 end

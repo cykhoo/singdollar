@@ -1,106 +1,112 @@
 module SingDollar
 
-  require 'mechanize'
   require 'nokogiri'
   require 'bigdecimal'
 
   class ExchangeRatesMaker
 
-    def create
+    attr_reader :session, :doc
+
+    EXCHANGE_RATES_URL = 'https://www.ocbc.com/rates/daily_price_fx.html'
+
+    def initialize
+      @session = HeadlessBrowser.new.session
+    end
+
+    def make_exchange_rates
+      visit_exchange_rates_page
+      parse_html_with_nokogiri
       exchange_rates = ExchangeRates.new
       exchange_rates.date_time = make_date_time
       currencies = get_available_currencies
       currencies.each_with_index do |currency, index|
         currency_node = currency_node(index)
-        exchange_rate = make_exchange_rate(currency_node)
+        exchange_rate = make_exchange_rate(currency, currency_node)
         exchange_rates[exchange_rate.currency] = exchange_rate
       end
       exchange_rates
     end
 
-    def make_exchange_rate(currency_node)
+    def make_exchange_rate(currency, currency_node)
 
         exchange_rate = ExchangeRate.new
 
-        units = currency_node[1].text.strip.split[0].to_f
-
-        currency = currency_node[0].text.strip.downcase.to_sym
+        units = currency_node[0].text.strip.split[0].to_f
 
         transaction_bank_selling = Transaction.new
 
         transaction_bank_selling.currency = currency
         transaction_bank_selling.type     = :bank_selling
-        if currency_node[3].text.strip != "N.A"
-          bank_selling_tt_od                = (BigDecimal(currency_node[3].text.strip)/units).to_f
+
+        if currency_node[1].text.strip != "N.A."
+          transaction_bank_selling.rate = (BigDecimal(currency_node[1].text.strip)/units).to_f
         else
-          bank_selling_tt_od                = 0
+          transaction_bank_selling.rate = 0
         end
-        transaction_bank_selling.tt       = bank_selling_tt_od
-        transaction_bank_selling.od       = bank_selling_tt_od
 
         transaction_bank_buying = Transaction.new
 
         transaction_bank_buying.currency = currency
         transaction_bank_buying.type     = :bank_buying
 
-        if currency_node[4].text.strip != "N.A"
-          transaction_bank_buying.tt       = (BigDecimal(currency_node[4].text.strip)/units).to_f
+        if currency_node[2].text.strip != "N.A."
+          transaction_bank_buying.rate = (BigDecimal(currency_node[2].text.strip)/units).to_f
         else
-          transaction_bank_buying.tt       = 0
-        end
-
-        if currency_node[5].text.strip != "N.A"
-          transaction_bank_buying.od       = (BigDecimal(currency_node[5].text.strip)/units).to_f
-        else
-          transaction_bank_buying.od       = 0
+          transaction_bank_buying.rate = 0
         end
 
         exchange_rate.bank_selling = transaction_bank_selling
         exchange_rate.bank_buying  = transaction_bank_buying
-
-        exchange_rate.currency = transaction_bank_selling.currency
+        exchange_rate.currency     = transaction_bank_selling.currency
 
         exchange_rate
     end
 
-    def agent
-      @agent ||= Mechanize.new
+    def visit_exchange_rates_page
+      puts "Visiting exchange rates page..."
+      session.visit EXCHANGE_RATES_URL
+      puts "Waiting for exchange rates to load..."
+      sleep 0.1 until session.has_content?('American Dollar')
+      session
     end
 
-    def page
-      @page ||= agent.get('http://www.ocbc.com/rates/daily_price_fx.html')
-    end
-
-    def html
-      @html ||= page.body
-    end
-
-    def doc
-      @doc ||= Nokogiri::HTML(html)
+    def parse_html_with_nokogiri
+      puts "Parsing HTML of exchange rates page..."
+      @doc ||= Nokogiri::HTML(session.body)
     end
 
     def currencies_column
-      doc.xpath("//*[text()='Foreign Exchange against S$']/../following-sibling::table[1]//tr[position() >= 3]/td[1]")
+      puts "Searching for currencies in page..."
+      return doc.xpath("//th[text()='Currency']/../../following-sibling::tbody/tr/td[1]/text()")
     end
 
     def currency_node(index)
-      doc.xpath("//*[text()='Foreign Exchange against S$']/../following-sibling::table[1]//tr[#{index + 3}]/td")
+      return doc.xpath("//th[text()='Currency']/../../following-sibling::tbody/tr[#{index + 1}]/td[position() >= 2 and position() <=4 ]/text()")
     end
 
-    def date_time_node
-      doc.xpath("//*[text()='OCBC FOREIGN EXCHANGE RATES']/following-sibling::p[2]")
+    def date_node
+      puts "Searching for date page was updated..."
+      return doc.xpath("//*[@id='ocbc-fx-calculator-last-update-date']/text()")
+    end
+
+    def time_node
+      puts "Searching for time page was updated..."
+      return doc.xpath("//*[@id='ocbc-fx-calculator-last-update-time']/text()")
     end
 
     def get_available_currencies
-      currencies_list = currencies_column.text.gsub(/\s+/m, ' ').strip.downcase.split(" ").map(&:to_sym)
+      puts "Getting available currencies..."
+      currencies_list = currencies_column.map do |currency|
+        currency.text[0..2].downcase.to_sym
+      end
       currencies_list
     end
 
     def make_date_time
-      date_time_text = date_time_node.text
-      date_match = date_time_text.match(/\d{2}\s[a-zA-Z]{3}\s\d{4}/)[0]
-      time_match = date_time_text.match(/\d{2}:\d{2}:\d{2}\s(AM|PM)/)[0]
-      Time.parse(date_match + " " + time_match + "SGT")
+      puts "Generating timestamp..."
+      date_time_text = date_node.text + " " + time_node.text
+      date_time = Time.parse(date_time_text)
+      date_time
     end
   end
 end

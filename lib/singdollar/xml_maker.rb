@@ -15,12 +15,10 @@ module SingDollar
             caller_object.each do |currency, exchange_rate|
               xml.send(:"exchange-rate", currency: currency.upcase) do
                 xml.send(:"bank-buying") do
-                  xml.tt exchange_rate.bank_buying.tt
-                  xml.od exchange_rate.bank_buying.od
+                  xml.rate exchange_rate.bank_buying.rate
                 end
                 xml.send(:"bank-selling") do
-                  xml.tt exchange_rate.bank_selling.tt
-                  xml.od exchange_rate.bank_selling.od
+                  xml.rate exchange_rate.bank_selling.rate
                 end
               end
             end
