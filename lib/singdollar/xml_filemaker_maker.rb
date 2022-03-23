@@ -20,6 +20,7 @@ module SingDollar
             xml.ROW(MODID: "0", RECORDID: "0") do
               [currency.upcase,
                exchange_rate.bank_buying.rate,
+               exchange_rate.bank_selling.rate,
                date_time].each do |value|
                 # value = value.to_slash_format if value.instance_of?(Time)
                 xml.COL do
