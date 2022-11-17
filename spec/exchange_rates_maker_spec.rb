@@ -23,19 +23,7 @@ module SingDollar
     describe "interface" do
 
       it "attributes and methods" do
-        expect(exchange_rates_maker).to respond_to(:session)
-        expect(exchange_rates_maker).to respond_to(:doc)
-        expect(exchange_rates_maker).to respond_to(:make_exchange_rate)
         expect(exchange_rates_maker).to respond_to(:make_exchange_rates)
-        expect(exchange_rates_maker).to respond_to(:make_exchange_rate)
-        expect(exchange_rates_maker).to respond_to(:visit_exchange_rates_page)
-        expect(exchange_rates_maker).to respond_to(:parse_html_with_nokogiri)
-        expect(exchange_rates_maker).to respond_to(:currencies_column)
-        expect(exchange_rates_maker).to respond_to(:currency_node)
-        expect(exchange_rates_maker).to respond_to(:date_node)
-        expect(exchange_rates_maker).to respond_to(:time_node)
-        expect(exchange_rates_maker).to respond_to(:get_available_currencies)
-        expect(exchange_rates_maker).to respond_to(:make_date_time)
       end
     end
 
