@@ -15,8 +15,8 @@ module SingDollar
       session.visit EXCHANGE_RATES_URL
       puts "Waiting for exchange rates to load..."
       sleep 0.1 until session.has_content?('American Dollar')
-      page = Nokogiri::HTML(session.html)
-      page
+      page_html = session.html
+      page_html
     end
   end
 end

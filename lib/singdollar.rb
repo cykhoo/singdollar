@@ -15,7 +15,7 @@ module SingDollar
   class << self
 
     def exchange_rates
-      ExchangeRatesMaker.new.make_exchange_rates
+      ExchangeRatesMaker.new.create
     end
   end
 end

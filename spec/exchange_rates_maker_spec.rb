@@ -23,13 +23,14 @@ module SingDollar
     describe "interface" do
 
       it "attributes and methods" do
-        expect(exchange_rates_maker).to respond_to(:make_exchange_rates)
+        expect(exchange_rates_maker).to respond_to(:create)
+        expect(exchange_rates_maker).to respond_to(:create_from_html)
       end
     end
 
-    describe "make_exchange_rates method" do
+    describe "create method" do
 
-      let(:exchange_rates) { exchange_rates_maker.make_exchange_rates }
+      let(:exchange_rates) { exchange_rates_maker.create }
 
       it "returns an ExchangesRates object" do
         expect(exchange_rates.class).to eq(ExchangeRates)
