@@ -8,8 +8,9 @@ Gem::Specification.new do |spec|
   spec.version       = SingDollar::VERSION
   spec.authors       = ["Chong-Yee Khoo"]
   spec.email         = ["mail@cykhoo.com"]
-  spec.description   = %q{Foreign exchange rates against the Singapore Dollar (SGD)}
+
   spec.summary       = %q{Foreign exchange rates against the Singapore Dollar (SGD)}
+  spec.description   = %q{Foreign exchange rates against the Singapore Dollar (SGD)}
   spec.homepage      = "http://www.cykhoo.com"
   spec.license       = "Copyright 2013-2022, Chong-Yee Khoo. All rights reserved."
 
@@ -18,13 +19,12 @@ Gem::Specification.new do |spec|
   if spec.respond_to?(:metadata)
     spec.metadata['allowed_push_host'] = "https://rubygems.pkg.github.com/cykhoo"
   else
-    raise "RubyGems 2.0 or newer is required to protect against " \
-      "public gem pushes."
+    raise "RubyGems 2.0 or newer is required to protect against public gem pushes."
   end
 
-  spec.files         = `git ls-files`.split($/)
-  spec.executables   = spec.files.grep(%r{^bin/}) { |f| File.basename(f) }
-  spec.test_files    = spec.files.grep(%r{^(test|spec|features)/})
+  spec.files         = `git ls-files -z`.split("\x0").reject { |f| f.match(%r{^(test|spec|features)/}) }
+  spec.bindir        = "exe"
+  spec.executables   = spec.files.grep(%r{^exe/}) { |f| File.basename(f) }
   spec.require_paths = ["lib"]
 
   spec.add_development_dependency "bundler"
