@@ -1,0 +1,36 @@
+#!/usr/bin/env ruby
+
+require 'thor'
+require 'singdollar'
+
+class SingDollarCLI < Thor
+
+  def self.exit_on_failure?
+    true
+  end
+
+  puts "SingDollar: Foreign exchange rates against the Singapore Dollar (SGD)"
+  puts "Copyright 2013 Chong-Yee Khoo. All rights reserved."
+  puts ""
+
+  desc "version", "Show version number (also -v and --version)"
+  map %w[--version -v] => :version
+
+  def version
+    puts SingDollar::VERSION
+  end
+
+  desc "xml", "Print rates in XML format to stdout."
+
+  def xml
+    puts SingDollar.exchange_rates.to_xml
+  end
+
+  desc "fmpxml", "Print rates in XML format with FMPXMLRESULT grammar to stdout."
+
+  def fmpxml
+    puts SingDollar.exchange_rates.to_fmpxml
+  end
+end
+
+SingDollarCLI.start

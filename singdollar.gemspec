@@ -37,4 +37,5 @@ Gem::Specification.new do |spec|
   spec.add_runtime_dependency "capybara"
   spec.add_runtime_dependency "selenium-webdriver", "< 4.0"
   spec.add_runtime_dependency 'nokogiri'
+  spec.add_runtime_dependency "thor"
 end
