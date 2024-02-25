@@ -10,7 +10,7 @@ class SingDollarCLI < Thor
   end
 
   puts "SingDollar: Foreign exchange rates against the Singapore Dollar (SGD)"
-  puts "Copyright 2013 Chong-Yee Khoo. All rights reserved."
+  puts "Copyright 2013-2024 Chong-Yee Khoo. All rights reserved."
   puts ""
 
   desc "version", "Show version number (also -v and --version)"
