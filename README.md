@@ -1,6 +1,6 @@
 # SingDollar
 
-TODO: Write a gem description
+Foreign exchange rates against the Singapore Dollar (SGD)
 
 ## Installation
 
@@ -18,7 +18,17 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+SingDollar: Foreign exchange rates against the Singapore Dollar (SGD)
+```
+Commands:
+    singdollar fmpxml          # Print rates in XML format with FMPXMLRESULT grammar to stdout.
+    singdollar help [COMMAND]  # Describe available commands or one specific command
+    singdollar version         # Show version number (also -v and --version)
+    singdollar xml             # Print rates in XML format to stdout.
+```
+## Copyright
+
+Copyright 2013-2024 Chong-Yee Khoo. All rights reserved.
 
 ## Contributing
 
