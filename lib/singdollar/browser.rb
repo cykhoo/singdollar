@@ -17,29 +17,68 @@ module SingDollar
       end
     end
 
+    # Use a slower-but-robust HTTP client for Selenium session handshakes
+    def self.selenium_http_client
+      open_t = Integer(ENV.fetch("SELENIUM_OPEN_TIMEOUT", "120"))
+      read_t = Integer(ENV.fetch("SELENIUM_READ_TIMEOUT", "300"))
+      Selenium::WebDriver::Remote::Http::Default.new(
+        open_timeout: open_t,
+        read_timeout: read_t
+      )
+    end
+
+    # default Capybara settings (env overridable)
+    Capybara.configure do |c|
+      c.default_driver        = :headless_chrome
+      c.javascript_driver     = :headless_chrome
+      c.default_max_wait_time = Integer(ENV.fetch("CAPYBARA_WAIT", "60"))
+    end
+
     # normal chrome (can be remote or local)
     Capybara.register_driver :chrome do |app|
       options = chrome_options(headless: false)
+      client  = selenium_http_client
+
       if !SELENIUM_URL.empty?
-        Capybara::Selenium::Driver.new(app, browser: :remote, url: SELENIUM_URL, options: options)
+        Capybara::Selenium::Driver.new(
+          app,
+          browser: :remote,
+          url: SELENIUM_URL,
+          options: options,
+          http_client: client
+        )
       else
-        Capybara::Selenium::Driver.new(app, browser: :chrome, options: options)
+        Capybara::Selenium::Driver.new(
+          app,
+          browser: :chrome,
+          options: options,
+          http_client: client
+        )
       end
     end
 
     # headless chrome (can be remote or local)
     Capybara.register_driver :headless_chrome do |app|
       options = chrome_options(headless: true)
+      client  = selenium_http_client
+
       if !SELENIUM_URL.empty?
-        Capybara::Selenium::Driver.new(app, browser: :remote, url: SELENIUM_URL, options: options)
+        Capybara::Selenium::Driver.new(
+          app,
+          browser: :remote,
+          url: SELENIUM_URL,
+          options: options,
+          http_client: client
+        )
       else
-        Capybara::Selenium::Driver.new(app, browser: :chrome, options: options)
+        Capybara::Selenium::Driver.new(
+          app,
+          browser: :chrome,
+          options: options,
+          http_client: client
+        )
       end
     end
-
-    Capybara.default_driver = :headless_chrome
-    Capybara.javascript_driver = :headless_chrome
-    Capybara.default_max_wait_time = 30
 
     def initialize(driver: :headless_chrome)
       @session = Capybara::Session.new(driver)
