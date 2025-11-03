@@ -7,18 +7,53 @@ module SingDollar
     require 'capybara'
     require 'selenium/webdriver'
 
-    chrome_options = Selenium::WebDriver::Chrome::Options.new
-    chrome_options.add_option("excludeSwitches", ["enable-automation"])
+    SELENIUM_URL = ENV["SELENIUM_REMOTE_URL"]
+
+    def self.chrome_options(headless: false)
+      opts = Selenium::WebDriver::Chrome::Options.new
+      opts.add_option("excludeSwitches", ["enable-automation"])
+      opts.add_argument("--no-sandbox")
+      opts.add_argument("--disable-dev-shm-usage")
+      opts.add_argument("--window-size=1280,800")
+      opts.add_argument("--disable-gpu")
+      opts.add_argument("--headless=new") if headless
+      opts
+    end
 
     Capybara.register_driver :chrome do |app|
-      Capybara::Selenium::Driver.new(app, browser: :chrome, options: chrome_options)
+      options = chrome_options(headless: false)
+      if SELENIUM_URL && !SELENIUM_URL.empty?
+        Capybara::Selenium::Driver.new(
+          app,
+          browser: :remote,
+          url: SELENIUM_URL,
+          capabilities: options
+        )
+      else
+        Capybara::Selenium::Driver.new(
+          app,
+          browser: :chrome,
+          options: options
+        )
+      end
     end
 
     Capybara.register_driver :headless_chrome do |app|
-      chrome_options.add_argument('--headless')
-      chrome_options.add_argument('--no-sandbox')
-      chrome_options.add_argument('--disable-dev-shm-usage')
-      Capybara::Selenium::Driver.new(app, browser: :chrome, options: chrome_options)
+      options = chrome_options(headless: true)
+      if SELENIUM_URL && !SELENIUM_URL.empty?
+        Capybara::Selenium::Driver.new(
+          app,
+          browser: :remote,
+          url: SELENIUM_URL,
+          capabilities: options
+        )
+      else
+        Capybara::Selenium::Driver.new(
+          app,
+          browser: :chrome,
+          options: options
+        )
+      end
     end
 
     Capybara.default_driver    = :chrome
