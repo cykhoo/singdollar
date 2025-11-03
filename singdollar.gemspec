@@ -34,8 +34,8 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency 'webmock'
   spec.add_development_dependency 'factory_bot'
 
-  spec.add_runtime_dependency "capybara"
-  spec.add_runtime_dependency "selenium-webdriver", "< 4.0"
+  spec.add_dependency "capybara", ">= 3.40"
+  spec.add_dependency "selenium-webdriver", ">= 4.8", "< 5"
   spec.add_runtime_dependency 'nokogiri'
   spec.add_runtime_dependency "thor"
 end
