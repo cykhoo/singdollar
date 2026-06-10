@@ -2,7 +2,7 @@ require 'spec_helper'
 
 module SingDollar
 
-  describe ExchangeRates, :vcr, :core do
+  describe ExchangeRates, :core do
 
     let(:exchange_rates) { ExchangeRates.new }
 

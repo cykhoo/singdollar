@@ -2,7 +2,7 @@ require 'spec_helper'
 
 module SingDollar
 
-  describe Transaction, :vcr, :core do
+  describe Transaction, :core do
 
     let(:transaction) { Transaction.new }
 

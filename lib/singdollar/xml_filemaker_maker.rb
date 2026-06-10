@@ -1,6 +1,7 @@
 module SingDollar
 
   class FileMakerXMLMaker
+    require 'nokogiri'
 
     attr_reader :caller_object
 

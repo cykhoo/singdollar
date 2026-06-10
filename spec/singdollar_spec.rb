@@ -2,7 +2,7 @@ require 'spec_helper'
 
 module SingDollar
 
-  describe SingDollar, :vcr, :core do
+  describe SingDollar, :core do
 
     before(:all) do
       @original_stdout = $stdout
@@ -20,6 +20,30 @@ module SingDollar
 
     let(:sing_dollar) { SingDollar }
 
+    let(:json) do
+      <<~JSON
+        {
+          "fxRatesSgd": [
+            {
+              "baseCurrencyCode": "USD",
+              "baseCurrencyName": "American Dollar",
+              "exchangeCurrencyCode": "SGD",
+              "exchangeCurrencyName": "Singapore Dollar",
+              "unitForSGDExchange": 1,
+              "tieredExchangeRates": [
+                {
+                  "tierLevel": 1,
+                  "bankSellRate": 1.298,
+                  "bankBuyRate": 1.2766
+                }
+              ]
+            }
+          ],
+          "lastUpdated": "2026-06-10T07:00:12"
+        }
+      JSON
+    end
+
     it "exists" do
       expect(sing_dollar).to_not be_nil
     end
@@ -31,6 +55,11 @@ module SingDollar
       end
 
       describe "get_exchange_rates method" do
+
+        before do
+          fetcher = instance_double(Fetcher, fetch_exchange_rates_json: json)
+          allow(Fetcher).to receive(:new).and_return(fetcher)
+        end
 
         it "returns an ExchangeRates object" do
           expect(sing_dollar.exchange_rates.class).to eq(ExchangeRates)

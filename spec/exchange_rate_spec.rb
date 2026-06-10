@@ -2,7 +2,7 @@ require 'spec_helper'
 
 module SingDollar
 
-  describe ExchangeRate, :vcr, :core do
+  describe ExchangeRate, :core do
 
     let(:exchange_rate) { FactoryBot.build(:exchange_rate) }
 

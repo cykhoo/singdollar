@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-ruby '3.1.3'
+ruby '4.0.5'
 
 # Specify your gem's dependencies in singdollar.gemspec
 gemspec
