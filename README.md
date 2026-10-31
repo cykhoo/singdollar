@@ -4,6 +4,12 @@ Foreign exchange rates against the Singapore Dollar (SGD)
 
 ## Installation
 
+Install `curl` before fetching rates. The Singdollar server Docker image already
+includes it. The fetcher first requests OCBC's exchange-rate page, then uses its
+cookies to retrieve the JSON feed. Each fetch uses a private temporary cookie file
+which is deleted afterwards. The page may return HTTP 403 while still setting
+cookies; the feed must succeed and contain valid exchange-rate JSON.
+
 Add this line to your application's Gemfile:
 
     gem 'singdollar'
